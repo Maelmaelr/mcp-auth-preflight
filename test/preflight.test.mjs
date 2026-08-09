@@ -205,6 +205,36 @@ test("fails a required protected endpoint that is absent even when stale metadat
   assert.match(finding?.message ?? "", /should return 401 with a Bearer challenge/);
 });
 
+test("fails PRM whose resource identifier drops the challenged endpoint path", async () => {
+  const endpoint = "https://mcp.example.com/mcp";
+  const prmUrl = "https://mcp.example.com/.well-known/oauth-protected-resource";
+  const issuer = "https://auth.example.com";
+  const asUrl = "https://auth.example.com/.well-known/oauth-authorization-server";
+  const fetchImpl = stubFetch({
+    [endpoint]: emptyResponse(endpoint, 401, {
+      "www-authenticate": `Bearer resource_metadata="${prmUrl}"`,
+    }),
+    [prmUrl]: jsonResponse(prmUrl, {
+      resource: "https://mcp.example.com",
+      authorization_servers: [issuer],
+    }),
+    [asUrl]: jsonResponse(asUrl, {
+      issuer,
+      authorization_endpoint: "https://auth.example.com/authorize",
+      token_endpoint: "https://auth.example.com/token",
+      code_challenge_methods_supported: ["S256"],
+      client_id_metadata_document_supported: true,
+      authorization_response_iss_parameter_supported: true,
+    }),
+  });
+
+  const report = await preflight(endpoint, { fetchImpl, requireAuth: true });
+  const finding = report.findings.find((entry) => entry.code === "prm.resource_mismatch");
+  assert.equal(report.summary.status, "fail");
+  assert.equal(finding?.level, "fail");
+  assert.match(finding?.message ?? "", /requires clients not to use mismatched metadata/);
+});
+
 test("flags mismatched issuers, missing endpoints, and offline_access", async () => {
   const endpoint = "https://mcp.example.com/mcp";
   const prmUrl = "https://mcp.example.com/.well-known/oauth-protected-resource";

@@ -274,7 +274,13 @@ function validateProtectedResourceMetadata(report, endpoint, result) {
     try {
       const resource = normalizePublicHttpsUrl(document.resource, "Protected resource identifier");
       if (!equivalentResource(resource, endpoint)) {
-        addFinding(report, "warn", "prm.resource_mismatch", `The metadata resource identifier (${resource.href}) differs from the tested MCP endpoint (${endpoint.href}).`, result.url);
+        addFinding(
+          report,
+          "fail",
+          "prm.resource_mismatch",
+          `The metadata resource identifier (${resource.href}) does not exactly match the tested MCP endpoint (${endpoint.href}); RFC 9728 requires clients not to use mismatched metadata.`,
+          result.url,
+        );
       } else {
         addFinding(report, "pass", "prm.resource_matches", "The protected resource identifier matches the tested MCP endpoint.", result.url);
       }
