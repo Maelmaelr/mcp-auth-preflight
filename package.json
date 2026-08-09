@@ -1,0 +1,25 @@
+{
+  "name": "mcp-auth-preflight",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "Read-only public-surface preflight for remote MCP OAuth discovery",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Maelmaelr/mcp-auth-preflight.git"
+  },
+  "keywords": [
+    "mcp",
+    "oauth",
+    "openid-connect",
+    "interoperability"
+  ],
+  "scripts": {
+    "preflight": "node src/cli.mjs",
+    "test": "node --test"
+  },
+  "engines": {
+    "node": ">=22"
+  }
+}
