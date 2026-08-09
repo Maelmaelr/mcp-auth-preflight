@@ -331,7 +331,7 @@ function validateAuthorizationServerMetadata(report, advertisedIssuer, result) {
   }
 
   if (!Array.isArray(document.code_challenge_methods_supported) || !document.code_challenge_methods_supported.includes("S256")) {
-    addFinding(report, "warn", "as.pkce_s256_not_advertised", "The authorization server does not advertise PKCE S256 support, which public MCP clients rely on.", result.url);
+    addFinding(report, "fail", "as.pkce_s256_not_advertised", "The authorization server does not advertise PKCE S256 support; MCP clients must verify this capability and refuse authorization when it is absent.", result.url);
   } else {
     addFinding(report, "pass", "as.pkce_s256", "The authorization server advertises PKCE S256 support.", result.url);
   }

@@ -277,6 +277,33 @@ test("flags mismatched issuers, missing endpoints, and offline_access", async ()
   }
 });
 
+test("fails authorization metadata that does not advertise PKCE S256", async () => {
+  const endpoint = "https://mcp.example.com/mcp";
+  const prmUrl = "https://mcp.example.com/.well-known/oauth-protected-resource";
+  const issuer = "https://auth.example.com";
+  const asUrl = "https://auth.example.com/.well-known/oauth-authorization-server";
+  const fetchImpl = stubFetch({
+    [endpoint]: emptyResponse(endpoint, 401, { "www-authenticate": `Bearer resource_metadata="${prmUrl}"` }),
+    [prmUrl]: jsonResponse(prmUrl, {
+      resource: endpoint,
+      authorization_servers: [issuer],
+    }),
+    [asUrl]: jsonResponse(asUrl, {
+      issuer,
+      authorization_endpoint: "https://auth.example.com/authorize",
+      token_endpoint: "https://auth.example.com/token",
+      client_id_metadata_document_supported: true,
+      authorization_response_iss_parameter_supported: true,
+    }),
+  });
+
+  const report = await preflight(endpoint, { fetchImpl, requireAuth: true });
+  const finding = report.findings.find((entry) => entry.code === "as.pkce_s256_not_advertised");
+  assert.equal(report.summary.status, "fail");
+  assert.equal(finding?.level, "fail");
+  assert.match(finding?.message ?? "", /must verify this capability and refuse authorization/);
+});
+
 test("continues to the OIDC insertion location after unusable OAuth metadata", async () => {
   const endpoint = "https://mcp.example.com/mcp";
   const prmUrl = "https://mcp.example.com/.well-known/oauth-protected-resource";
