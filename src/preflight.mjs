@@ -196,7 +196,7 @@ export async function preflight(endpointValue, options = {}) {
       );
     }
   } catch (error) {
-    addFinding(report, "warn", "probe.request_failed", `The initial MCP request failed: ${error.message}`, endpoint.href);
+    addFinding(report, "warn", "probe.request_failed", `The initial MCP request failed: ${describeError(error)}`, endpoint.href);
   }
 
   const prmCandidates = dedupeUrls([
@@ -477,4 +477,25 @@ function dedupeUrls(values) {
 
 function isPlainObject(value) {
   return value !== null && typeof value === "object" && !Array.isArray(value);
+}
+
+function describeError(error) {
+  const parts = [];
+  const seen = new Set();
+  let current = error;
+
+  for (let depth = 0; depth < 4 && current && !seen.has(current); depth += 1) {
+    seen.add(current);
+    const message = typeof current.message === "string"
+      ? current.message.replace(/[\r\n\t]+/g, " ").trim()
+      : "";
+    const code = typeof current.code === "string" && /^[A-Z0-9_]+$/.test(current.code)
+      ? current.code
+      : "";
+    const detail = code && message ? `${message} (${code})` : code || message;
+    if (detail && !parts.includes(detail)) parts.push(detail);
+    current = current.cause;
+  }
+
+  return parts.join(": ") || "unknown transport error";
 }

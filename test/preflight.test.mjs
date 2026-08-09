@@ -177,6 +177,23 @@ test("fails when auth is required but no PRM can be discovered", async () => {
   assert.ok(report.findings.some((finding) => finding.code === "prm.not_found"));
 });
 
+test("preserves a nested TLS cause in the public probe finding", async () => {
+  const endpoint = "https://mcp.example.com/mcp";
+  const fetchImpl = async () => {
+    const cause = Object.assign(new Error("unable to verify the first certificate"), {
+      code: "UNABLE_TO_VERIFY_LEAF_SIGNATURE",
+    });
+    throw new TypeError("fetch failed", { cause });
+  };
+
+  const report = await preflight(endpoint, { fetchImpl, requireAuth: true });
+  const finding = report.findings.find((entry) => entry.code === "probe.request_failed");
+  assert.match(
+    finding?.message ?? "",
+    /fetch failed: unable to verify the first certificate \(UNABLE_TO_VERIFY_LEAF_SIGNATURE\)/,
+  );
+});
+
 test("fails a required protected endpoint that is absent even when stale metadata remains", async () => {
   const endpoint = "https://mcp.example.com/mcp";
   const prmUrl = "https://mcp.example.com/.well-known/oauth-protected-resource";
