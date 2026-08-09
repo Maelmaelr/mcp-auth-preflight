@@ -1,0 +1,51 @@
+name: Request an implementation estimate
+description: Ask for help repairing one remote MCP authorization flow
+title: "Implementation request: "
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Use this only for information that is safe to post publicly. Do not include credentials, tokens, private endpoints, customer data, logs containing secrets, or vulnerability details.
+
+        The founding engagement is USD 399 fixed scope for one remote MCP server, one authorization provider, and one target client. Authenticated work, production access, contracting, and payment are agreed privately and require human approval.
+  - type: input
+    id: public_endpoint
+    attributes:
+      label: Public MCP endpoint
+      description: Optional. Leave blank if the endpoint is not already public.
+      placeholder: https://mcp.example.com/mcp
+  - type: input
+    id: target_client
+    attributes:
+      label: Target client
+      description: The client that fails or needs to be validated.
+      placeholder: ChatGPT, Codex, Claude, Cursor, custom client, or not sure
+    validations:
+      required: true
+  - type: textarea
+    id: symptom
+    attributes:
+      label: Observable symptom
+      description: Describe the user-visible behavior without secrets or private logs.
+      placeholder: The client reaches sign-in, then returns to a connection error.
+    validations:
+      required: true
+  - type: dropdown
+    id: price
+    attributes:
+      label: Founding fixed scope
+      options:
+        - USD 399 scope is acceptable if the fit is confirmed
+        - I need a scope estimate first
+        - I only need help using the free checker
+    validations:
+      required: true
+  - type: checkboxes
+    id: safety
+    attributes:
+      label: Public-data boundary
+      options:
+        - label: I have not included credentials, private endpoints, customer data, or security-sensitive details.
+          required: true
+        - label: I understand that public metadata alone cannot prove end-to-end compatibility.
+          required: true
