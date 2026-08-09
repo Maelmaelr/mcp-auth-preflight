@@ -144,10 +144,12 @@ export async function preflight(endpointValue, options = {}) {
           method: "server/discover",
           params: {
             _meta: {
+              "io.modelcontextprotocol/protocolVersion": MCP_PROTOCOL_VERSION,
               "io.modelcontextprotocol/clientInfo": {
                 name: "mcp-auth-preflight",
                 version: "0.1.0",
               },
+              "io.modelcontextprotocol/clientCapabilities": {},
             },
           },
         }),

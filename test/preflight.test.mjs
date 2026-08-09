@@ -3,6 +3,7 @@ import assert from "node:assert/strict";
 
 import {
   authorizationServerMetadataCandidates,
+  MCP_PROTOCOL_VERSION,
   normalizePublicHttpsUrl,
   parseBearerChallenge,
   preflight,
@@ -72,6 +73,41 @@ test("parses quoted Bearer challenge parameters", () => {
       scope: "files:read files:write",
     },
   );
+});
+
+test("sends the complete 2026-07-28 per-request metadata envelope", async () => {
+  const endpoint = "https://mcp.example.com/mcp";
+  let observedRequest;
+  const fetchImpl = async (input, init) => {
+    const url = input instanceof URL ? input.href : String(input);
+    if (url === endpoint) {
+      observedRequest = init;
+      return jsonResponse(endpoint, {
+        jsonrpc: "2.0",
+        id: "auth-preflight",
+        result: {
+          resultType: "complete",
+          supportedVersions: [MCP_PROTOCOL_VERSION],
+          capabilities: {},
+        },
+      });
+    }
+    return emptyResponse(url, 404);
+  };
+
+  await preflight(endpoint, { fetchImpl });
+
+  assert.equal(observedRequest?.headers["mcp-protocol-version"], MCP_PROTOCOL_VERSION);
+  assert.equal(observedRequest?.headers["mcp-method"], "server/discover");
+  const body = JSON.parse(observedRequest?.body ?? "{}");
+  assert.deepEqual(body.params?._meta, {
+    "io.modelcontextprotocol/protocolVersion": MCP_PROTOCOL_VERSION,
+    "io.modelcontextprotocol/clientInfo": {
+      name: "mcp-auth-preflight",
+      version: "0.1.0",
+    },
+    "io.modelcontextprotocol/clientCapabilities": {},
+  });
 });
 
 test("passes a complete CIMD-oriented discovery surface", async () => {
