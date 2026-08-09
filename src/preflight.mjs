@@ -183,7 +183,15 @@ export async function preflight(endpointValue, options = {}) {
         endpoint.href,
       );
     } else {
-      addFinding(report, "warn", "probe.unexpected_status", `The unauthenticated discovery request returned HTTP ${response.status}; metadata fallback will still be checked.`, endpoint.href);
+      addFinding(
+        report,
+        requireAuth ? "fail" : "warn",
+        "probe.unexpected_status",
+        requireAuth
+          ? `The unauthenticated discovery request returned HTTP ${response.status}; a required protected endpoint should return 401 with a Bearer challenge.`
+          : `The unauthenticated discovery request returned HTTP ${response.status}; metadata fallback will still be checked.`,
+        endpoint.href,
+      );
     }
   } catch (error) {
     addFinding(report, "warn", "probe.request_failed", `The initial MCP request failed: ${error.message}`, endpoint.href);
