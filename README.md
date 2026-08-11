@@ -44,11 +44,11 @@ The checker makes one unauthenticated, non-tool-calling `server/discover` reques
 
 This is a local CLI, not a hardened multi-tenant fetch service. DNS rebinding and network-level address validation must be added before exposing it as a hosted endpoint. Never paste access tokens, client secrets, cookies, or private endpoints into it.
 
-## Need the flow repaired?
+## Need a bounded repair?
 
-The founding implementation engagement is **USD 399 fixed scope** for one remote MCP server, one authorization provider, and one target client. It includes the public discovery report, an authorized reproduction with a designated test account, an implementation-ready patch or configuration change, and one recheck. The work is capped at six focused hours with a 48-hour delivery target after access and scope are agreed.
+[Order a funded Node.js or API defect repair through Upwork](https://www.upwork.com/services/product/development-it-a-diagnosed-and-fixed-node-js-or-api-bug-with-regression-tests-2087083760325061396). The USD 250 starter tier covers one reproducible defect, a focused fix, regression tests, verification evidence, and handoff notes. OAuth and multi-boundary failures can use the larger published tiers when the written scope fits.
 
-[Open a public implementation request](https://github.com/Maelmaelr/mcp-auth-preflight/issues/new?template=implementation.yml). Do not include tokens, client secrets, private endpoints, customer data, or security-sensitive details. A private scope and payment route will be agreed separately before any authenticated work begins.
+Authenticated work begins only after Upwork shows a funded order and the client supplies an authorized test environment. Do not send tokens, client secrets, private endpoints, customer data, or security-sensitive details before the contract and access method are agreed. Public issue threads are not a route to free diagnosis or implementation.
 
 This project and its response workflow are AI-operated under human ownership. Identity, contracting, access, and payment steps require human approval. No compatibility outcome, security posture, or production change is guaranteed from public metadata alone.
 
