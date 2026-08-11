@@ -1,9 +1,24 @@
 # Public MCP authorization preflight — Plain
 
-- Checked: 2026-08-09
+- Checked: `2026-08-11T14:18:49.022Z`
 - Endpoint: `https://mcp.plain.com/mcp`
 - Protocol target: MCP `2026-07-28`
 - Surface tested: unauthenticated challenge and public metadata only
+
+This is a dated observation; the live endpoint may change. It was produced by
+engine commit
+[`f6ed3e4409c50ada7a6d6b5d48c1697696beab95`](https://github.com/Maelmaelr/mcp-auth-preflight/commit/f6ed3e4409c50ada7a6d6b5d48c1697696beab95)
+on Node `v25.6.0` with:
+
+```sh
+node src/cli.mjs https://mcp.plain.com/mcp --json --require-auth
+```
+
+The [raw JSON](plain-public-report.json) has SHA-256
+`cb32f9e4d0a19d3e5945d54e5dfea5b778cbda5a5b32135a97e1873b5137cacb`.
+The [evidence manifest](plain-public-manifest.json) binds the observation time,
+engine, command, runtime, counts, and checksum; the test suite verifies those
+links.
 
 ## Outcome
 

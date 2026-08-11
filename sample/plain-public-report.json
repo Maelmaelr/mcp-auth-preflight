@@ -1,0 +1,146 @@
+{
+  "schema_version": "mcp-auth-preflight/v1alpha1",
+  "checked_at": "2026-08-11T14:18:49.022Z",
+  "protocol_version": "2026-07-28",
+  "endpoint": "https://mcp.plain.com/mcp",
+  "require_auth": true,
+  "probe": {
+    "status": 401,
+    "final_url": "https://mcp.plain.com/mcp",
+    "bearer_challenge": {
+      "resource_metadata": "https://mcp.plain.com/.well-known/oauth-protected-resource",
+      "scope": "openid offline_access",
+      "scope_mode": "require_all"
+    }
+  },
+  "protected_resource_metadata": {
+    "url": "https://mcp.plain.com/.well-known/oauth-protected-resource",
+    "document": {
+      "resource": "https://mcp.plain.com/mcp",
+      "authorization_servers": [
+        "https://signin.auth.plain.com/"
+      ],
+      "bearer_methods_supported": [
+        "header"
+      ],
+      "scopes_supported": [
+        "openid",
+        "offline_access"
+      ]
+    }
+  },
+  "authorization_servers": [
+    {
+      "issuer": "https://signin.auth.plain.com/",
+      "metadata": {
+        "url": "https://signin.auth.plain.com/.well-known/oauth-authorization-server",
+        "document": {
+          "authorization_endpoint": "https://signin.auth.plain.com/oauth2/authorize",
+          "client_id_metadata_document_supported": true,
+          "code_challenge_methods_supported": [
+            "S256"
+          ],
+          "device_authorization_endpoint": "https://signin.auth.plain.com/oauth2/device_authorization",
+          "grant_types_supported": [
+            "authorization_code",
+            "refresh_token",
+            "urn:ietf:params:oauth:grant-type:device_code"
+          ],
+          "introspection_endpoint": "https://signin.auth.plain.com/oauth2/introspection",
+          "issuer": "https://signin.auth.plain.com",
+          "jwks_uri": "https://signin.auth.plain.com/oauth2/jwks",
+          "registration_endpoint": "https://signin.auth.plain.com/oauth2/register",
+          "scopes_supported": [
+            "email",
+            "offline_access",
+            "openid",
+            "profile"
+          ],
+          "response_modes_supported": [
+            "query"
+          ],
+          "response_types_supported": [
+            "code"
+          ],
+          "token_endpoint": "https://signin.auth.plain.com/oauth2/token",
+          "token_endpoint_auth_methods_supported": [
+            "none",
+            "client_secret_post",
+            "client_secret_basic"
+          ]
+        }
+      }
+    }
+  ],
+  "findings": [
+    {
+      "level": "pass",
+      "code": "challenge.resource_metadata",
+      "message": "The Bearer challenge advertises a public HTTPS resource_metadata URL.",
+      "url": "https://mcp.plain.com/.well-known/oauth-protected-resource"
+    },
+    {
+      "level": "pass",
+      "code": "prm.resource_matches",
+      "message": "The protected resource identifier matches the tested MCP endpoint.",
+      "url": "https://mcp.plain.com/.well-known/oauth-protected-resource"
+    },
+    {
+      "level": "pass",
+      "code": "prm.authorization_servers_present",
+      "message": "Protected Resource Metadata advertises 1 authorization server(s).",
+      "url": "https://mcp.plain.com/.well-known/oauth-protected-resource"
+    },
+    {
+      "level": "warn",
+      "code": "prm.offline_access",
+      "message": "Protected resources should not advertise offline_access as a resource scope.",
+      "url": "https://mcp.plain.com/.well-known/oauth-protected-resource"
+    },
+    {
+      "level": "fail",
+      "code": "as.issuer_mismatch",
+      "message": "Metadata issuer must exactly match the advertised issuer (https://signin.auth.plain.com/).",
+      "url": "https://signin.auth.plain.com/.well-known/oauth-authorization-server"
+    },
+    {
+      "level": "pass",
+      "code": "as.authorization_endpoint_valid",
+      "message": "authorization_endpoint is a public HTTPS URL.",
+      "url": "https://signin.auth.plain.com/.well-known/oauth-authorization-server"
+    },
+    {
+      "level": "pass",
+      "code": "as.token_endpoint_valid",
+      "message": "token_endpoint is a public HTTPS URL.",
+      "url": "https://signin.auth.plain.com/.well-known/oauth-authorization-server"
+    },
+    {
+      "level": "pass",
+      "code": "as.pkce_s256",
+      "message": "The authorization server advertises PKCE S256 support.",
+      "url": "https://signin.auth.plain.com/.well-known/oauth-authorization-server"
+    },
+    {
+      "level": "pass",
+      "code": "as.cimd_supported",
+      "message": "The authorization server advertises Client ID Metadata Document support, the current preferred registration mechanism.",
+      "url": "https://signin.auth.plain.com/.well-known/oauth-authorization-server"
+    },
+    {
+      "level": "warn",
+      "code": "as.response_iss_not_advertised",
+      "message": "Authorization-response iss is not advertised; MCP recommends emitting it now for mix-up protection and future compatibility.",
+      "url": "https://signin.auth.plain.com/.well-known/oauth-authorization-server"
+    }
+  ],
+  "summary": {
+    "status": "fail",
+    "counts": {
+      "fail": 1,
+      "warn": 2,
+      "pass": 7,
+      "info": 0
+    }
+  }
+}

@@ -37,7 +37,6 @@ body:
       options:
         - USD 399 scope is acceptable if the fit is confirmed
         - I need a scope estimate first
-        - I only need help using the free checker
     validations:
       required: true
   - type: checkboxes

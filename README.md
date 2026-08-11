@@ -1,5 +1,7 @@
 # MCP Authorization Preflight
 
+[![Verify](https://github.com/Maelmaelr/mcp-auth-preflight/actions/workflows/verify.yml/badge.svg?branch=main&event=push)](https://github.com/Maelmaelr/mcp-auth-preflight/actions/workflows/verify.yml?query=branch%3Amain+event%3Apush)
+
 A dependency-free, read-only checker for the public authorization-discovery surface of a remote HTTP MCP server.
 
 It answers a deliberately narrow question: can a standards-aware client discover the protected resource and authorization server metadata it needs before a user signs in?
@@ -13,7 +15,7 @@ It does not ask for credentials, follow an authorization redirect, register an O
 
 No implementation starts from a public issue. Authenticated investigation begins only after the written scope, funding, and authorized access method are confirmed.
 
-See [`sample/plain-public-report.md`](sample/plain-public-report.md) for a real public-surface result and its deliberately limited repair claim.
+See [`sample/plain-public-report.md`](sample/plain-public-report.md) for a dated public-surface result, raw JSON, and a commit-bound evidence manifest. The sample makes a deliberately limited repair claim and may not reflect the endpoint's current state.
 
 ## Checks
 

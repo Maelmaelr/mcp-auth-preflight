@@ -1,0 +1,23 @@
+{
+  "schema_version": "mcp-auth-preflight-evidence/v1",
+  "observation_kind": "historical_public_metadata",
+  "endpoint": "https://mcp.plain.com/mcp",
+  "checked_at": "2026-08-11T14:18:49.022Z",
+  "engine_commit": "f6ed3e4409c50ada7a6d6b5d48c1697696beab95",
+  "command": "node src/cli.mjs https://mcp.plain.com/mcp --json --require-auth",
+  "node_version": "v25.6.0",
+  "report": {
+    "path": "sample/plain-public-report.json",
+    "sha256": "cb32f9e4d0a19d3e5945d54e5dfea5b778cbda5a5b32135a97e1873b5137cacb"
+  },
+  "summary": {
+    "status": "fail",
+    "counts": {
+      "fail": 1,
+      "warn": 2,
+      "pass": 7,
+      "info": 0
+    }
+  },
+  "boundary": "Unauthenticated public metadata only. This is a dated observation, not a guarantee of the endpoint's current state, security, or client compatibility."
+}
