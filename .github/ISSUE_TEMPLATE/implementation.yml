@@ -7,7 +7,7 @@ body:
       value: |
         Use this only for information that is safe to post publicly. Do not include credentials, tokens, private endpoints, customer data, logs containing secrets, or vulnerability details.
 
-        The founding engagement is USD 399 fixed scope for one remote MCP server, one authorization provider, and one target client. Authenticated work, production access, contracting, and payment are agreed privately and require human approval.
+        The founding engagement is USD 399 fixed scope for one remote MCP server, one authorization provider, and one target client: one reproducible authorization defect, up to eight focused engineering hours, one revision, and delivery within four business days after a funded order and authorized test access. Authenticated work, production access, contracting, and payment are agreed privately and require human approval.
   - type: input
     id: public_endpoint
     attributes:

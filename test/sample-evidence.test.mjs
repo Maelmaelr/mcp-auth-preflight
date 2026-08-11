@@ -8,6 +8,7 @@ const manifestPath = new URL("../sample/plain-public-manifest.json", import.meta
 const narrativePath = new URL("../sample/plain-public-report.md", import.meta.url);
 const readmePath = new URL("../README.md", import.meta.url);
 const implementationFormPath = new URL("../.github/ISSUE_TEMPLATE/implementation.yml", import.meta.url);
+const issueConfigPath = new URL("../.github/ISSUE_TEMPLATE/config.yml", import.meta.url);
 
 test("the public sample is version-bound, internally consistent evidence", async () => {
   const [reportBytes, manifestText, narrative] = await Promise.all([
@@ -45,9 +46,10 @@ test("the public sample is version-bound, internally consistent evidence", async
 });
 
 test("the available commercial route is a non-binding public-data fit check", async () => {
-  const [readme, implementationForm] = await Promise.all([
+  const [readme, implementationForm, issueConfig] = await Promise.all([
     readFile(readmePath, "utf8"),
     readFile(implementationFormPath, "utf8"),
+    readFile(issueConfigPath, "utf8"),
   ]);
 
   assert.doesNotMatch(readme, /upwork\.com\/services\/product/);
@@ -60,4 +62,8 @@ test("the available commercial route is a non-binding public-data fit check", as
   assert.match(implementationForm, /safe to post publicly/i);
   assert.match(implementationForm, /Do not include credentials, tokens, private endpoints/i);
   assert.match(implementationForm, /USD 399 scope is acceptable if the fit is confirmed/);
+  assert.match(implementationForm, /up to eight focused engineering hours/);
+  assert.match(implementationForm, /one revision/);
+  assert.match(implementationForm, /within four business days/);
+  assert.equal(issueConfig.trim(), "blank_issues_enabled: false");
 });
