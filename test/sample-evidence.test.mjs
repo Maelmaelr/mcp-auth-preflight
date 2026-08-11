@@ -6,6 +6,8 @@ import { readFile } from "node:fs/promises";
 const reportPath = new URL("../sample/plain-public-report.json", import.meta.url);
 const manifestPath = new URL("../sample/plain-public-manifest.json", import.meta.url);
 const narrativePath = new URL("../sample/plain-public-report.md", import.meta.url);
+const readmePath = new URL("../README.md", import.meta.url);
+const implementationFormPath = new URL("../.github/ISSUE_TEMPLATE/implementation.yml", import.meta.url);
 
 test("the public sample is version-bound, internally consistent evidence", async () => {
   const [reportBytes, manifestText, narrative] = await Promise.all([
@@ -40,4 +42,18 @@ test("the public sample is version-bound, internally consistent evidence", async
   assert.match(narrative, new RegExp(manifest.engine_commit));
   assert.match(narrative, new RegExp(manifest.report.sha256));
   assert.match(narrative, /dated observation/i);
+});
+
+test("the available commercial route is a non-binding public-data fit check", async () => {
+  const [readme, implementationForm] = await Promise.all([
+    readFile(readmePath, "utf8"),
+    readFile(implementationFormPath, "utf8"),
+  ]);
+
+  assert.doesNotMatch(readme, /upwork\.com\/services\/product/);
+  assert.match(readme, /Request a USD 399 implementation estimate/);
+  assert.match(readme, /not a proposal, contract, funded order, or support channel/);
+  assert.match(implementationForm, /safe to post publicly/i);
+  assert.match(implementationForm, /Do not include credentials, tokens, private endpoints/i);
+  assert.match(implementationForm, /USD 399 scope is acceptable if the fit is confirmed/);
 });

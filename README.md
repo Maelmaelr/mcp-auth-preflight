@@ -11,9 +11,8 @@ It does not ask for credentials, follow an authorization redirect, register an O
 ## Turn a failing preflight into a bounded repair
 
 - [Request a USD 399 implementation estimate](https://github.com/Maelmaelr/mcp-auth-preflight/issues/new?template=implementation.yml) for one remote MCP server, one authorization provider, and one target client. The form accepts public, no-secrets symptoms only.
-- [Order a funded defect repair through Upwork](https://www.upwork.com/services/product/development-it-a-diagnosed-and-fixed-node-js-or-api-bug-with-regression-tests-2087083760325061396) when the problem fits the published USD 250/450/750 tiers.
 
-No implementation starts from a public issue. Authenticated investigation begins only after the written scope, funding, and authorized access method are confirmed.
+No implementation starts from a public issue. A funded order route is supplied only after fit and operating availability are confirmed. Authenticated investigation begins only after the written scope, funding, and authorized access method are confirmed.
 
 See [`sample/plain-public-report.md`](sample/plain-public-report.md) for a dated public-surface result, raw JSON, and a commit-bound evidence manifest. The sample makes a deliberately limited repair claim and may not reflect the endpoint's current state.
 
@@ -53,9 +52,9 @@ The checker makes one unauthenticated, non-tool-calling `server/discover` reques
 
 This is a local CLI, not a hardened multi-tenant fetch service. DNS rebinding and network-level address validation must be added before exposing it as a hosted endpoint. Never paste access tokens, client secrets, cookies, or private endpoints into it.
 
-## Need a bounded repair?
+## Commercial boundary
 
-[Order a funded Node.js or API defect repair through Upwork](https://www.upwork.com/services/product/development-it-a-diagnosed-and-fixed-node-js-or-api-bug-with-regression-tests-2087083760325061396). The USD 250 starter tier covers one reproducible defect, a focused fix, regression tests, verification evidence, and handoff notes. OAuth and multi-boundary failures can use the larger published tiers when the written scope fits.
+[Request a USD 399 implementation estimate](https://github.com/Maelmaelr/mcp-auth-preflight/issues/new?template=implementation.yml) for one reproducible remote-MCP authorization defect, a focused fix, regression evidence, and handoff notes. The issue is only a public-data fit check; it is not a proposal, contract, funded order, or support channel.
 
 Authenticated work begins only after Upwork shows a funded order and the client supplies an authorized test environment. Do not send tokens, client secrets, private endpoints, customer data, or security-sensitive details before the contract and access method are agreed. Public issue threads are not a route to free diagnosis or implementation.
 
