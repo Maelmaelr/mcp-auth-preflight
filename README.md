@@ -6,6 +6,13 @@ It answers a deliberately narrow question: can a standards-aware client discover
 
 It does not ask for credentials, follow an authorization redirect, register an OAuth client, exchange a code, test token audience enforcement, or claim compatibility with a named client. Those require an authorized test account and a real end-to-end flow.
 
+## Turn a failing preflight into a bounded repair
+
+- [Request a USD 399 implementation estimate](https://github.com/Maelmaelr/mcp-auth-preflight/issues/new?template=implementation.yml) for one remote MCP server, one authorization provider, and one target client. The form accepts public, no-secrets symptoms only.
+- [Order a funded defect repair through Upwork](https://www.upwork.com/services/product/development-it-a-diagnosed-and-fixed-node-js-or-api-bug-with-regression-tests-2087083760325061396) when the problem fits the published USD 250/450/750 tiers.
+
+No implementation starts from a public issue. Authenticated investigation begins only after the written scope, funding, and authorized access method are confirmed.
+
 See [`sample/plain-public-report.md`](sample/plain-public-report.md) for a real public-surface result and its deliberately limited repair claim.
 
 ## Checks
