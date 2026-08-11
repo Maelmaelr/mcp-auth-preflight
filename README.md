@@ -12,6 +12,13 @@ It does not ask for credentials, follow an authorization redirect, register an O
 
 - [Request a USD 399 implementation estimate](https://github.com/Maelmaelr/mcp-auth-preflight/issues/new?template=implementation.yml) for one remote MCP server, one authorization provider, and one target client. The form accepts public, no-secrets symptoms only.
 
+The founding package covers one reproducible authorization defect, up to eight
+focused engineering hours, one revision, and delivery within four business days
+after a funded order and authorized test access. It includes a reviewable fix,
+focused regression tests, before/after evidence, and handoff notes. It does not
+include a new authentication system, broad stabilization, production mutation,
+penetration testing, live-payment testing, or open-ended support.
+
 No implementation starts from a public issue. A funded order route is supplied only after fit and operating availability are confirmed. Authenticated investigation begins only after the written scope, funding, and authorized access method are confirmed.
 
 See [`sample/plain-public-report.md`](sample/plain-public-report.md) for a dated public-surface result, raw JSON, and a commit-bound evidence manifest. The sample makes a deliberately limited repair claim and may not reflect the endpoint's current state.

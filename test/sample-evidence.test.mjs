@@ -52,6 +52,10 @@ test("the available commercial route is a non-binding public-data fit check", as
 
   assert.doesNotMatch(readme, /upwork\.com\/services\/product/);
   assert.match(readme, /Request a USD 399 implementation estimate/);
+  assert.match(readme, /up to eight\s+focused engineering hours/);
+  assert.match(readme, /within four business days/);
+  assert.match(readme, /reviewable fix/);
+  assert.match(readme, /does not\s+include a new authentication system/);
   assert.match(readme, /not a proposal, contract, funded order, or support channel/);
   assert.match(implementationForm, /safe to post publicly/i);
   assert.match(implementationForm, /Do not include credentials, tokens, private endpoints/i);
